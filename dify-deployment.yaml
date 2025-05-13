@@ -1862,21 +1862,19 @@ spec:
       - name: dify-nginx-config
         emptyDir: {}
 ---
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
   name: dify-nginx
   namespace: dify
 spec:
   selector:
     app: dify-nginx
-  type: NodePort  # 将类型改为 NodePort
+  type: ClusterIP
   ports:
   - name: dify-nginx
     port: 80
     targetPort: 80
-    nodePort: 30010  # 设置 NodePort 为 30010
-
 ---
 kind: Service
 apiVersion: v1
