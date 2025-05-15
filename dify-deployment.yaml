@@ -644,9 +644,9 @@ spec:
           mountPath: /var/lib/postgresql/data
       volumes:
       - name: postgres-data
-        hostPath:
-          path: /root/dify/db/postgres/data
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/postgres
 ---
 apiVersion: v1
 kind: Service
@@ -757,9 +757,9 @@ spec:
           mountPath: /data
       volumes:
       - name: redis-data
-        hostPath:
-          path: /root/dify/db/redis/data
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/redis
 ---
 apiVersion: v1
 kind: Service
@@ -841,9 +841,9 @@ spec:
       serviceAccountName: dify-weaviate
       volumes:
       - name: weaviate-data
-        hostPath:
-          path: /root/dify/db/weaviate/data
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/weaviate
       containers:
       - name: dify-weaviate
         image: 192.168.44.130:5000/semitechnologies/weaviate:1.19.0
@@ -1324,9 +1324,9 @@ spec:
         kubernetes.io/os: linux
       volumes:
       - name: dify-api-storage
-        hostPath:
-          path: /root/dify/app/api/storage
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/api
       containers:
       - name: dify-api
         image: 192.168.44.130:5000/langgenius/dify-api:1.3.1
@@ -1436,9 +1436,9 @@ spec:
         kubernetes.io/os: linux
       volumes:
       - name: dify-api-storage
-        hostPath:
-          path: /root/dify/app/api/storage
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/api
       containers:
       - name: dify-worker
         image: 192.168.44.130:5000/langgenius/dify-api:1.3.1
@@ -1918,9 +1918,9 @@ spec:
       automountServiceAccountToken: false
       volumes:
       - name: dify-plugin-daemon-storage
-        hostPath:
-          path: /root/dify/app/plugin/storage
-          type: DirectoryOrCreate
+        nfs:
+          server: 192.168.44.130
+          path: /data/nas/dify/plugin
       containers:
       - name: dify-plugin-daemon
         image: 192.168.44.130:5000/langgenius/dify-plugin-daemon:0.0.9-local
